@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular nascimento</title>
+    <style>
+        /* Fundo com imagem fofa */
+        body {
+            background-image: url('cute.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        /* Restante dos estilos */
+        .main {
+            background-color: rgb(255, 255, 255); /* Fundo branco com transparência */
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #FF8AAE;
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #FFB6C1;
+            border-radius: 10px;
+            outline: none;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+            background-color: #FFF5F7;
+        }
+
+        button {
+            background-color: #FF8AAE;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF6386;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #FF8AAE;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #FFF5F7;
+        }
+    </style>
+</head>
+<body>
+    <br><br>
+    <div class="main">
+        <h2>Quando seu bebê vai nascer?</h2>
+
+        <label for="ultimaMestruacao">Data da última menstruação:</label>
+        <br><br>
+        <input type="date" id="ultimaMestruacao">
+        <br><br>
+        <button onclick="calcularDataNascimento()">Calcular Data</button>
+        <br><br>
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularDataNascimento() {
+            const ultimaMestruacao = document.getElementById("ultimaMestruacao").value;
+
+            if (!ultimaMestruacao) {
+                document.getElementById("resultado").innerHTML = "Por favor, insira uma data válida.";
+                return;
+            }
+
+            const dataMestruacao = new Date(ultimaMestruacao);
+            const diasDeGravidez = 280;
+            dataMestruacao.setDate(dataMestruacao.getDate() + diasDeGravidez);
+
+            const dataNascimento = dataMestruacao.toLocaleDateString('pt-BR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+
+            document.getElementById("resultado").innerHTML = `Data estimada de nascimento: ${dataNascimento}`;
+        }
+    </script>
+</body>
+</html>
